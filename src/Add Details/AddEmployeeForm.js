@@ -6,12 +6,13 @@ import { motion } from "motion/react";
 function AddEmployeeForm({ setOpeningEmployeeForm }) {
   return (
     <div className="bg-black z-50 flex justify-center items-center fixed inset-0 bg-opacity-30">
-      <motion.div 
-      initial={{ opacity: 0, scale: 0.5 }} 
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.5 }} 
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-white w-96 sm:w-auto h-[550px] mx-5 overflow-auto sm:h-auto p-5 rounded">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.5 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="bg-white w-96 sm:w-auto h-[550px] mx-5 overflow-auto sm:h-auto p-5 rounded"
+      >
         <div className="flex items-center mb-7 justify-between">
           <p className="text-2xl font-bold text-[#2f4858]">Add Employee</p>
           <button onClick={() => setOpeningEmployeeForm(false)}>
@@ -26,7 +27,7 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
               <div>
-                <p className="font-semibold text-[#2f4858]">Name</p>
+                <p className="font-semibold text-[#2f4858]">Employee Name</p>
                 <input className="border w-full border-gray-300 p-1 rounded"></input>
               </div>
               <div>
@@ -123,7 +124,9 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
         </div>
 
         <div className="flex justify-end mt-5">
-            <button className="bg-[#9ee493] shadow hover:bg-[#2f4858] text-white rounded py-2 px-3 mt-5">Create Employee</button>
+          <button className="bg-[#9ee493] shadow hover:bg-[#2f4858] text-white rounded py-2 px-3 mt-5">
+            Create Employee
+          </button>
         </div>
       </motion.div>
     </div>
