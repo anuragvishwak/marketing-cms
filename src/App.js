@@ -21,7 +21,7 @@ function App() {
           <Route path="/Employees" element={<Employees />} />
           <Route path="/Clients" element={<Clients />} />
           <Route path="/Projects" element={<Projects />} />
-          <Route path="/Billing & Payments" element={<BilllingPayments />} />
+          <Route path="/BilllingPayments" element={<BilllingPayments />} />
         </Routes>
       </Router>
     </div>
