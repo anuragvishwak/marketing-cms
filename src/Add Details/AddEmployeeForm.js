@@ -1,9 +1,49 @@
-import React from "react";
-import { BiCross } from "react-icons/bi";
+import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { motion } from "motion/react";
+import { addDoc, collection } from "firebase/firestore";
+import { database } from "../FirebaseConfig";
 
 function AddEmployeeForm({ setOpeningEmployeeForm }) {
+  const [employeeName, setEmployeeName] = useState("");
+  const [contact, setContact] = useState("");
+  const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [dateOfJoining, setDateOfJoining] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [department, setDepartment] = useState("");
+  const [reportManager, setReportManager] = useState("");
+  const [officialEmail, setOfficialEmail] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [bankAccountNo, setBankAccountNo] = useState("");
+  const [ifscCode, setIfscCode] = useState("");
+  const [upiId, setUpiId] = useState("");
+
+  async function addEmployee() {
+    try {
+      const docRef = await addDoc(collection(database, "employees_details"), {
+        employeeName: employeeName,
+        contact: contact,
+        gender: gender,
+        address: address,
+        dateOfJoining: dateOfJoining,
+        jobTitle: jobTitle,
+        department: department,
+        reportManager: reportManager,
+        officialEmail: officialEmail,
+        bankName: bankName,
+        bankAccountNo: bankAccountNo,
+        ifscCode: ifscCode,
+        upiId: upiId,
+      });
+      console.log("Employee added with ID: ", docRef.id);
+      setOpeningEmployeeForm(false);
+    } catch (error) {
+      console.error("Error adding employee: ", error);
+      return { success: false, error };
+    }
+  }
+
   return (
     <div className="bg-black z-50 flex justify-center items-center fixed inset-0 bg-opacity-30">
       <motion.div
@@ -28,15 +68,24 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
             <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
               <div>
                 <p className="font-semibold text-[#2f4858]">Employee Name</p>
-                <input className="border w-full border-gray-300 p-1 rounded"></input>
+                <input
+                  onChange={(e) => setEmployeeName(e.target.value)}
+                  className="border w-full border-gray-300 p-1 rounded"
+                ></input>
               </div>
               <div>
                 <p className="font-semibold text-[#2f4858]">Contact</p>
-                <input className="border w-full border-gray-300 p-1 rounded"></input>
+                <input
+                  onChange={(e) => setContact(e.target.value)}
+                  className="border w-full border-gray-300 p-1 rounded"
+                ></input>
               </div>
               <div>
                 <p className="font-semibold text-[#2f4858]">Gender</p>
-                <select className="border w-full border-gray-300 p-1 rounded">
+                <select
+                  onChange={(e) => setGender(e.target.value)}
+                  className="border w-full border-gray-300 p-1 rounded"
+                >
                   <option>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -45,7 +94,10 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
             </div>
             <div>
               <p className="font-semibold text-[#2f4858]">Address</p>
-              <textarea className="border w-full border-gray-300 p-1 rounded"></textarea>
+              <textarea
+                onChange={(e) => setAddress(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></textarea>
             </div>
           </div>
         </div>
@@ -60,16 +112,25 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
             <div>
               <p className="font-semibold text-[#2f4858]">Job Title / Role</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setJobTitle(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
 
             <div>
               <p className="font-semibold text-[#2f4858]">Date of Joining</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setDateOfJoining(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
             <div>
               <p className="font-semibold text-[#2f4858]">Department</p>
-              <select className="border w-full border-gray-300 p-1 rounded">
+              <select
+                onChange={(e) => setDepartment(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              >
                 <option>Select Department</option>
                 <option>Photography</option>
                 <option>Videography</option>
@@ -83,7 +144,10 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
             <div>
               <p className="font-semibold text-[#2f4858]">Report Manager</p>
-              <select className="border w-full border-gray-300 p-1 rounded">
+              <select
+                onChange={(e) => setReportManager(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              >
                 <option>Select Manager</option>
                 <option>Ritika</option>
                 <option>Jiten</option>
@@ -92,7 +156,10 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
 
             <div>
               <p className="font-semibold text-[#2f4858]">Official E-Mail</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setOfficialEmail(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
           </div>
         </div>
@@ -104,27 +171,44 @@ function AddEmployeeForm({ setOpeningEmployeeForm }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
             <div>
               <p className="font-semibold text-[#2f4858]">Bank Name</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setBankName(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
             <div>
               <p className="font-semibold text-[#2f4858]">Bank Account No</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setBankAccountNo(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
 
             <div>
               <p className="font-semibold text-[#2f4858]">IFSC Code</p>
-              <input className="border w-full border-gray-300 p-1 rounded"></input>
+              <input
+                onChange={(e) => setIfscCode(e.target.value)}
+                className="border w-full border-gray-300 p-1 rounded"
+              ></input>
             </div>
           </div>
 
           <div className="">
             <p className="font-semibold text-[#2f4858]">UPI ID</p>
-            <input className="border w-full border-gray-300 p-1 rounded"></input>
+            <input
+              onChange={(e) => setUpiId(e.target.value)}
+              className="border w-full border-gray-300 p-1 rounded"
+            ></input>
           </div>
         </div>
 
         <div className="flex justify-end mt-5">
-          <button className="bg-[#9ee493] shadow hover:bg-[#2f4858] text-white rounded py-2 px-3 mt-5">
+          <button
+            onClick={() => {
+              addEmployee();
+            }}
+            className="bg-[#9ee493] shadow hover:bg-[#2f4858] text-white rounded py-2 px-3 mt-5"
+          >
             Create Employee
           </button>
         </div>
