@@ -26,7 +26,7 @@ function Notification({ setOpeningNotification }) {
           damping: 15,
           mass: 0.5,
         }}
-        className="bg-white rounded overflow-auto h-screen w-full sm:w-[500px] sm:mx-10 sm:mt-40"
+        className="bg-white rounded overflow-auto h-full sm:h-screen w-full sm:w-[500px] sm:mx-10 sm:mt-40"
       >
         <div className="flex items-center p-2.5 bg-[#2f4858] text-white justify-between">
           <p className="text-xl font-bold">Notification Panel</p>
