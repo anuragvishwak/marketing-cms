@@ -10,7 +10,7 @@ function AddBilliingPayment({ setAddbillingForm }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.5 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="bg-white p-5 rounded"
+        className="bg-white w-full sm:w-auto h-full overflow-auto sm:h-auto p-5 rounded"
       >
         <div className="flex items-center mb-7 justify-between">
           <p className="text-2xl font-bold text-[#2f4858]">
